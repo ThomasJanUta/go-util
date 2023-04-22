@@ -1,0 +1,26 @@
+# ---------------------------------
+# Project-specific
+
+# ---------------------------------
+# General project and configuration files
+.env*
+!.env.sample
+
+# ---------------------------------
+# Go
+bin
+pkg
+go.work
+
+# ---------------------------------
+# Intellij
+.idea
+
+# ---------------------------------
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
