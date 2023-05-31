@@ -29,18 +29,35 @@ func New(workflowFn interface{}, logger *log.Logger) *Workflow {
 	return &wf
 }
 
-func (wf *Workflow) Start(args ...interface{}) {
-	wf.logger.Println("### WORKFLOW START:", wf.name, args)
+func (wf *Workflow) Start(args ...interface{}) *Workflow {
+	err := wf.logger.Output(2, fmt.Sprintln("### WORKFLOW START:", wf.name, args))
+	if err != nil {
+		fmt.Println("log.Output errored during logging:", err)
+		fmt.Sprintln(args...)
+	}
+	return wf
 }
 func (wf *Workflow) Finish(args ...interface{}) {
 	duration := time.Since(wf.start).Minutes()
-	wf.logger.Println("### WORKFLOW FINISH:", wf.name,
+	err := wf.logger.Output(2, fmt.Sprintln("### WORKFLOW FINISH:", wf.name,
 		"| duration in minutes:", fmt.Sprintf("%.3f", duration),
-		args)
+		args))
+	if err != nil {
+		fmt.Println("log.Output errored during logging:", err)
+		fmt.Sprintln(args...)
+	}
 }
 func (wf *Workflow) Step(args ...interface{}) {
-	wf.logger.Println("#####", wf.name, args)
+	err := wf.logger.Output(2, fmt.Sprintln("#####", wf.name, args))
+	if err != nil {
+		fmt.Println("log.Output errored during logging:", err)
+		fmt.Sprintln(args...)
+	}
 }
 func (wf *Workflow) Result(args ...interface{}) {
-	wf.logger.Println("### WORKFLOW RESULT:", wf.name, args)
+	err := wf.logger.Output(2, fmt.Sprintln("### WORKFLOW RESULT:", wf.name, args))
+	if err != nil {
+		fmt.Println("log.Output errored during logging:", err)
+		fmt.Sprintln(args...)
+	}
 }
